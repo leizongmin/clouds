@@ -22,7 +22,7 @@ cloud.register('hello', function (err, service) {
     callback(null, 'ok');
   });
 
-  var hello = cloud.require('hello2');
+  var hello = cloud.require('hello');
   hello.emit('say', 'first');
   hello.emit('say', 'second', function (err, ret) {
     if (err) console.log(err.stack);
