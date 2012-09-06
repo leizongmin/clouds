@@ -12,61 +12,62 @@
 
 ```javascript
 
-    // 初始化
-    var clouds = require('clouds');
+// 初始化
+var clouds = require('clouds');
 
-    // 连接配置
-    clouds.connect({
-      redis: {
-        host:   '127.0.0.1',    // redis服务器地址，可选
-        port:   6379,           // redis服务器端口，可选
-        db:     4,              // redis数据库号，可选
-        prefix: 'TEST:'         // redis键前缀，可选
-      },
-      service: {
-        callbackTimeout:  60000 // 调用超时（毫秒），默认为60000
-      }
-    });
-
-
-    // 注册服务，多个进程可以注册相同的服务，调用程序会自动找到最佳的进程
-    clouds.register('服务名', function (err, service) {
-      if (err) {
-        // 注册服务时出错了
-        throw err;
-      }
-
-      // 若没有出错，则service为该服务实例
-      // 注册事件处理函数
-      service.on('事件名', function (参数, callback) {
-        // 最后一个参数是回调函数，当该事件需要传送消息给调用者时，
-        // 可以通过该回调函数来传送，格式为： callback(err, 参数);
-      });
-    });
+// 连接配置
+clouds.connect({
+  redis: {
+    host:   '127.0.0.1',    // redis服务器地址，可选
+    port:   6379,           // redis服务器端口，可选
+    db:     4,              // redis数据库号，可选
+    prefix: 'TEST:'         // redis键前缀，可选
+  },
+  service: {
+    callbackTimeout:  60000 // 调用超时（毫秒），默认为60000
+  }
+});
 
 
-    // 引用服务
-    var test = clouds.require('服务名');
+// 注册服务，多个进程可以注册相同的服务，调用程序会自动找到最佳的进程
+clouds.register('服务名', function (err, service) {
+  if (err) {
+    // 注册服务时出错了
+    throw err;
+  }
+
+  // 若没有出错，则service为该服务实例
+  // 注册事件处理函数
+  service.on('事件名', function (参数, callback) {
+    // 最后一个参数是回调函数，当该事件需要传送消息给调用者时，
+    // 可以通过该回调函数来传送，格式为： callback(err, 参数);
+  });
+});
+
+
+// 引用服务
+var test = clouds.require('服务名');
     
-    // 触发相应的事件
-    test.emit('事件名', 参数);
+// 触发相应的事件
+test.emit('事件名', 参数);
 
-    // 如果需要接收回调：
-    test.emit('事件名', 参数, function (err, 参数) {
-      if (err) {
-        // 触发事件时出错了
-        throw err;
-      }
-    });
+// 如果需要接收回调：
+test.emit('事件名', 参数, function (err, 参数) {
+  if (err) {
+    // 触发事件时出错了
+    throw err;
+  }
+});
 
-    // 远程进程可能由于断线了，或这其他原因，超过了最大的等待时间（超时），会导致超时
-    // 可用通过 pemit() 来触发事件，若失败会尝试换另一个节点进程来完成
-    test.pemit(最大尝试次数, '事件名', 参数, function (err, 参数) {
-      if (err) {
-        // 出错
-        throw err;
-      }
-    });
+// 远程进程可能由于断线了，或这其他原因，超过了最大的等待时间（超时），会导致超时
+// 可用通过 pemit() 来触发事件，若失败会尝试换另一个节点进程来完成
+// 最大尝试次数为-1表示无限次
+test.pemit(最大尝试次数, '事件名', 参数, function (err, 参数) {
+  if (err) {
+    // 出错
+    throw err;
+  }
+});
 ```
 
 
