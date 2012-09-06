@@ -12,6 +12,7 @@
     "node":         ">= 0.6.0"
   },
   "dependencies":	{
-    "redis":        "*"
+    "redis":        "*",
+    "debug":        "*"
   }
 }
