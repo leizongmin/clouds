@@ -1,16 +1,16 @@
 'use strict';
 
-var cloud = require('cloud');
+var clouds = require('clouds');
 
-cloud.connect({
+clouds.connect({
   redis: {
     db:     4,
     prefix: 'TEST:'
   }
 });
-console.log('PID=' + cloud.pid);
+console.log('PID=' + clouds.pid);
 
-var s = cloud.require('test1');
+var s = clouds.require('test1');
 
 var i = 1;
 

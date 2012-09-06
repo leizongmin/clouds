@@ -1,8 +1,8 @@
 'use strict';
 
-var cloud = require('cloud');
+var clouds = require('clouds');
 
-cloud.connect({
+clouds.connect({
   redis: {
     db:     4,
     prefix: 'TEST:'
@@ -12,7 +12,7 @@ cloud.connect({
   }
 });
 
-cloud.register('test5', function (err, service) {
+clouds.register('test5', function (err, service) {
   if (err) throw err;
 
   var callCount = 0;
@@ -24,7 +24,7 @@ cloud.register('test5', function (err, service) {
     }
   });
 
-  var s = cloud.require('test5');
+  var s = clouds.require('test5');
   
   s.pemit(-1, 'say', 'second', function (err, ret) {
     if (err) console.log(err.stack);

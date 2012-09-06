@@ -1,6 +1,6 @@
 'use strict';
 
-var cloud = require('cloud');
+var clouds = require('clouds');
 var cluster = require('cluster');
   
 if (cluster.isMaster) {
@@ -24,7 +24,7 @@ if (cluster.isMaster) {
 
 } else {
 
-  cloud.connect({
+  clouds.connect({
     redis: {
       db:     4,
       prefix: 'TEST:'
@@ -33,13 +33,13 @@ if (cluster.isMaster) {
       callbackTimeout: 5000
     }
   });
-  console.log('PID=' + cloud.pid);
+  console.log('PID=' + clouds.pid);
 
-  cloud.register('test4', function (err, service) {
+  clouds.register('test4', function (err, service) {
     if (err) throw err;
 
     service.on('say', function (msg, callback) {
-      console.log(cloud.pid + ' on say: ' + msg);
+      console.log(clouds.pid + ' on say: ' + msg);
       setTimeout(function () {
         callback(null, 'ok');
       }, Math.random() * 5000);

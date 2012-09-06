@@ -1,8 +1,8 @@
 {
-  "name":           "cloud",
+  "name":           "clouds",
   "main":           "./index.js",
   "version":        "0.0.1",
-  "description":    "cloud",
+  "description":    "services cloud",
   "author":         "leizongmin <leizongmin@gmail.com> (http://ucdok.com)",
   "repository": {
     "type": "git",

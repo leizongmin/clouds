@@ -13,10 +13,10 @@
 ```javascript
 
     // 初始化
-    var cloud = require('cloud');
+    var clouds = require('clouds');
 
     // 连接配置
-    cloud.connect({
+    clouds.connect({
       redis: {
         host:   '127.0.0.1',    // redis服务器地址，可选
         port:   6379,           // redis服务器端口，可选
@@ -24,13 +24,13 @@
         prefix: 'TEST:'         // redis键前缀，可选
       },
       service: {
-        callbackTimeout:  60000 // 调用超时（毫秒） 
+        callbackTimeout:  60000 // 调用超时（毫秒），默认为60000
       }
     });
 
 
     // 注册服务，多个进程可以注册相同的服务，调用程序会自动找到最佳的进程
-    cloud.register('服务名', function (err, service) {
+    clouds.register('服务名', function (err, service) {
       if (err) {
         // 注册服务时出错了
         throw err;
@@ -46,7 +46,7 @@
 
 
     // 引用服务
-    var test = cloud.require('服务名');
+    var test = clouds.require('服务名');
     
     // 触发相应的事件
     test.emit('事件名', 参数);
@@ -72,12 +72,12 @@
 
 ## 原理
 
-1. `cloud.connect()`连接时，会为当前进程分配一个唯一的PID，并监听特定的频道，与通过该频道来接收其他进程发来的消息；
+1. `clouds.connect()`连接时，会为当前进程分配一个唯一的PID，并监听特定的频道，与通过该频道来接收其他进程发来的消息；
 
-2. `cloud.register()`注册服务时，会在该服务列表中添加该进程PID，并有一个初始分数，当使用`service.emit()`来触发一个事件时，会减1分，待执行回调时，会加1分，这样可以对进程进行排序：
+2. `clouds.register()`注册服务时，会在该服务列表中添加该进程PID，并有一个初始分数，当使用`service.emit()`来触发一个事件时，会减1分，待执行回调时，会加1分，这样可以对进程进行排序：
   + `service.emit()`会找一个分数最高的进程来发送触发事件的消息；
   + 如果一个进程接收了很多触发消息，但是没有回调，其分数就会减少，优先级也会降低；
-  + `service.emit()`触发事件时，若返回`timeout`错误，则会自动执行`cloud.clean()`来清理不在线的进程；
+  + `service.emit()`触发事件时，若返回`timeout`错误，则会自动执行`clouds.clean()`来清理不在线的进程；
 
 
 

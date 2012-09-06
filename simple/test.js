@@ -1,18 +1,18 @@
 'use strict';
 
-var cloud = require('cloud');
+var clouds = require('clouds');
 
-cloud.connect({
+clouds.connect({
   redis: {
     db:     4,
     prefix: 'TEST:'
   }
 });
 
-cloud.register('hello', function (err, service) {
+clouds.register('hello', function (err, service) {
   if (err) throw err;
   //console.log(service);
-  //cloud.unregister('hello', function (err) {
+  //clouds.unregister('hello', function (err) {
   //  if (err) throw err;
   //  process.exit();
   //});
@@ -22,7 +22,7 @@ cloud.register('hello', function (err, service) {
     callback(null, 'ok');
   });
 
-  var hello = cloud.require('hello');
+  var hello = clouds.require('hello');
   hello.emit('say', 'first');
   hello.emit('say', 'second', function (err, ret) {
     if (err) console.log(err.stack);

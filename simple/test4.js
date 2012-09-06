@@ -1,10 +1,10 @@
 'use strict';
 
-var cloud = require('cloud');
+var clouds = require('clouds');
 var success = require('debug')(' ok ');
 var fail = require('debug')('fail');
 
-cloud.connect({
+clouds.connect({
   redis: {
     db:     4,
     prefix: 'TEST:'
@@ -13,9 +13,9 @@ cloud.connect({
     callbackTimeout: 5000
   }
 });
-console.log('PID=' + cloud.pid);
+console.log('PID=' + clouds.pid);
 
-var s = cloud.require('test4');
+var s = clouds.require('test4');
 
 var i = 1;
 

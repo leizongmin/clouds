@@ -1,20 +1,20 @@
 'use strict';
 
-var cloud = require('cloud');
+var clouds = require('clouds');
 
-cloud.connect({
+clouds.connect({
   redis: {
     db:     4,
     prefix: 'TEST:'
   }
 });
-console.log('PID=' + cloud.pid);
+console.log('PID=' + clouds.pid);
 
-cloud.register('test1', function (err, service) {
+clouds.register('test1', function (err, service) {
   if (err) throw err;
 
   service.on('say', function (msg, callback) {
-    console.log(cloud.pid + ' on say: ' + msg);
+    console.log(clouds.pid + ' on say: ' + msg);
     setTimeout(function () {
       callback(null, 'ok');
     }, Math.random() * 2000);

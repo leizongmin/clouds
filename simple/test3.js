@@ -1,8 +1,8 @@
 'use strict';
 
-var cloud = require('cloud');
+var clouds = require('clouds');
 
-cloud.connect({
+clouds.connect({
   redis: {
     db:     4,
     prefix: 'TEST:'
@@ -12,7 +12,7 @@ cloud.connect({
   }
 });
 
-cloud.register('test3', function (err, service) {
+clouds.register('test3', function (err, service) {
   if (err) throw err;
 });
 
@@ -25,7 +25,7 @@ function die (t) {
 
 
 setTimeout(function () {
-  cloud.clean(function () {
+  clouds.clean(function () {
     die(500);
   });
   //die(2000);
