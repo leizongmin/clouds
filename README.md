@@ -42,6 +42,17 @@ clouds.register('服务名', function (err, service) {
     // 最后一个参数是回调函数，当该事件需要传送消息给调用者时，
     // 可以通过该回调函数来传送，格式为： callback(err, 参数);
   });
+
+  // 取服务配置
+  service.get('配置项', function (err, data) {
+    if (err) throw err;
+    // data为配置项值
+  });
+
+  // 设置服务配置
+  service.set('配置项', '值', function (err) {
+    if (err) throw err;
+  });
 });
 
 
@@ -68,6 +79,9 @@ test.pemit(最大尝试次数, '事件名', 参数, function (err, 参数) {
     throw err;
   }
 });
+
+// 取/设置服务配置项，跟Service实例相同
+
 ```
 
 
