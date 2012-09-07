@@ -12,8 +12,9 @@
     "node":         ">= 0.6.0"
   },
   "dependencies":	{
-    "redis":        "*",
-    "debug":        "*"
+    "redis":        ">= 0.7.2",
+    "debug":        ">= 0.7.0",
+    "wind":         ">= 0.7.1"
   },
   "devDependencies": {
     "mocha":        ">= 1.2"
