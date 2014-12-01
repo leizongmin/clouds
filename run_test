@@ -1,0 +1,14 @@
+#!/bin/sh
+
+export DEBUG=clouds:*
+
+# 导入初始化数据
+node test_init/import_data
+
+# 执行测试，如果指定了参数，则只测试指定文件
+if [ $1 ]
+then
+  mocha -t 30000 test/test_$1
+else
+  mocha -t 60000
+fi
