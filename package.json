@@ -13,8 +13,7 @@
   },
   "dependencies": {
     "debug": ">= 0.7.0",
-    "redis": "^0.12.1",
-    "wind": ">= 0.7.1"
+    "redis": "^0.12.1"
   },
   "devDependencies": {
     "mocha": ">= 1.2"

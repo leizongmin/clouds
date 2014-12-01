@@ -8,28 +8,30 @@ clouds.connect({
     prefix: 'TEST:'
   },
   service: {
-    callbackTimeout: 1000
+    callbackTimeout:  1000
   }
 });
 
-clouds.register('test2', function (err, service) {
+clouds.register('test5', function (err, service) {
   if (err) throw err;
-  
+
+  var callCount = 0;
   service.on('say', function (msg, callback) {
-    console.log('on say: ' + msg);
-    setTimeout(function () {
+    console.log('try ' + callCount + ' on say: ' + msg);
+    callCount++;
+    if (callCount > 2) {
       callback(null, 'ok');
-    }, 2000);
+    }
   });
 
-  var test = clouds.require('test2');
-  test.emit('say', 'first');
-  test.emit('say', 'second', function (err, ret) {
+  var s = clouds.require('test5');
+
+  s.pemit(-1, 'say', 'second', function (err, ret) {
     if (err) console.log(err.stack);
     console.log('emit say: ' + ret);
+    die(500);
   });
-  
-  die(5000);
+
 });
 
 

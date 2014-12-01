@@ -21,7 +21,7 @@ clouds.register('test6', function (err, service) {
   });
 
   var s = clouds.require('test6');
-  
+
   for (var i = 0; i < 10; i++) {
     setTimeout(function () {
       s.emit('say', 'hello ' + i);

@@ -16,7 +16,7 @@ clouds.register('hello', function (err, service) {
   //  if (err) throw err;
   //  process.exit();
   //});
-  
+
   service.on('say', function (msg, callback) {
     console.log('on say: ' + msg);
     callback(null, 'ok');
@@ -28,7 +28,7 @@ clouds.register('hello', function (err, service) {
     if (err) console.log(err.stack);
     console.log('emit say: ' + ret);
   });
-  
+
   die(1000);
 });
 

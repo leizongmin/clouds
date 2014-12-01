@@ -2,7 +2,7 @@
 
 var clouds = require('clouds');
 var cluster = require('cluster');
-  
+
 if (cluster.isMaster) {
 
   for (var i = 0; i < 20; i++) {
