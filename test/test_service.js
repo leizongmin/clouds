@@ -4,6 +4,11 @@ var clouds = require('./connect');
 var assert = require('assert');
 
 
+function dump () {
+  console.log.apply(console, arguments);
+}
+
+
 describe('Service & RemoteService', function () {
 
   describe('normal', function () {
@@ -65,6 +70,7 @@ describe('Service & RemoteService', function () {
       });
 
       remoteService.emit(event_name1, argv1, argv2, argv3, function (err, _argv3, _argv1, _argv2) {
+        dump(err, _argv1, _argv2, _argv3);
         assert.equal(err, null);
         assert.equal(_argv1, argv1);
         assert.equal(_argv2, argv2);

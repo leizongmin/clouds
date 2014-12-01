@@ -1,25 +1,25 @@
 {
-  "name":           "clouds",
-  "main":           "./index.js",
-  "version":        "0.0.1",
-  "description":    "services cloud",
-  "author":         "leizongmin <leizongmin@gmail.com> (http://ucdok.com)",
+  "name": "clouds",
+  "main": "./index.js",
+  "version": "0.0.2",
+  "description": "services cloud",
+  "author": "Zongmin Lei <leizongmin@gmail.com> (http://ucdok.com)",
   "repository": {
     "type": "git",
-    "url":  "git://github.com/leizongmin/node-cloud.git"
+    "url": "git://github.com/leizongmin/node-cloud.git"
   },
   "engines": {
-    "node":         ">= 0.6.0"
+    "node": ">= 0.6.0"
   },
-  "dependencies":	{
-    "redis":        ">= 0.7.2",
-    "debug":        ">= 0.7.0",
-    "wind":         ">= 0.7.1"
+  "dependencies": {
+    "debug": ">= 0.7.0",
+    "redis": "^0.12.1",
+    "wind": ">= 0.7.1"
   },
   "devDependencies": {
-    "mocha":        ">= 1.2"
+    "mocha": ">= 1.2"
   },
   "scripts": {
-    "test":         "mocha -t 5000"
+    "test": "mocha -t 5000"
   }
 }
