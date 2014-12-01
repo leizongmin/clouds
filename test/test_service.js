@@ -5,7 +5,7 @@ var assert = require('assert');
 
 
 describe('Service & RemoteService', function () {
-  
+
   describe('normal', function () {
 
     var service = null;
@@ -69,7 +69,7 @@ describe('Service & RemoteService', function () {
         assert.equal(_argv1, argv1);
         assert.equal(_argv2, argv2);
         assert.deepEqual(_argv3, argv3);
-        
+
         remoteService.emit(event_name2, argv1, argv2, argv3);
       });
     });
@@ -82,9 +82,9 @@ describe('Service & RemoteService', function () {
     });
 
   });
-  
+
   describe('timeout & pemit', function () {
-    
+
     var service = null;
     var service_name = 'test_service2';
     var event_name = 'fffsdds';
@@ -125,5 +125,5 @@ describe('Service & RemoteService', function () {
     });
 
   });
-  
+
 });
