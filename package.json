@@ -1,7 +1,7 @@
 {
   "name": "clouds",
-  "main": "./index.js",
-  "version": "0.0.2",
+  "main": "./lib/index.js",
+  "version": "0.1.0-pre",
   "description": "services cloud",
   "author": "Zongmin Lei <leizongmin@gmail.com> (http://ucdok.com)",
   "repository": {
@@ -9,10 +9,11 @@
     "url": "git://github.com/leizongmin/node-cloud.git"
   },
   "engines": {
-    "node": ">= 0.6.0"
+    "node": ">= 0.10.0"
   },
   "dependencies": {
     "debug": ">= 0.7.0",
+    "lei-utils": "^1.0.3",
     "redis": "^0.12.1"
   },
   "devDependencies": {
