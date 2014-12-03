@@ -1,0 +1,18 @@
+var clouds = require('../');
+
+
+var c = new clouds.Client({
+  redis: {
+    host: '127.0.0.1',
+    port: 6379,
+    db: 3
+  }
+});
+
+var testHello = c.bind('test.hello');
+//setInterval(function () {
+  testHello('Glen', 'timestamp is ' + Date.now(), function (err, ret) {
+    console.log(err, ret);
+    process.exit();
+  });
+//}, 1000);

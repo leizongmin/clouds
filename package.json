@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "debug": ">= 0.7.0",
+    "lei-ns": "^0.1.2",
     "lei-utils": "^1.0.3",
     "redis": "^0.12.1"
   },
