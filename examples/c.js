@@ -6,7 +6,8 @@ var c = new clouds.Client({
     host: '127.0.0.1',
     port: 6379,
     db: 3
-  }
+  },
+  timeout: 2000
 });
 
 var testHello = c.bind('test.hello');
