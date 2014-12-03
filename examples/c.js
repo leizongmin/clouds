@@ -7,13 +7,19 @@ var c = new clouds.Client({
     port: 6379,
     db: 3
   },
-  timeout: 2000
+  timeout: 1
 });
 
 var testHello = c.bind('test.hello');
 //setInterval(function () {
   testHello('Glen', 'timestamp is ' + Date.now(), function (err, ret) {
-    console.log(err, ret);
-    c.exit();
+    console.log(arguments);
+    //c.exit();
   });
 //}, 1000);
+
+var testRetry = c.bind('test.retry', 10);
+testRetry('hahahaha', function (err) {
+  console.log(err);
+  c.exit();
+});
