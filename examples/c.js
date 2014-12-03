@@ -14,6 +14,6 @@ var testHello = c.bind('test.hello');
 //setInterval(function () {
   testHello('Glen', 'timestamp is ' + Date.now(), function (err, ret) {
     console.log(err, ret);
-    process.exit();
+    c.exit();
   });
 //}, 1000);
