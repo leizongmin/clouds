@@ -4,6 +4,10 @@ var async = require('async');
 
 describe('register & call', function () {
 
+  function checkMessagesClean (c) {
+    Object.keys(c._messages).length.should.equal(0);
+  }
+
   it('test1 - normal call', function (done) {
     var s = clouds.createServer();
     var c = clouds.createClient({timeout: 5});
@@ -68,6 +72,7 @@ describe('register & call', function () {
     ], function (err) {
       console.log(err && err.stack);
       should.equal(err, null);
+      checkMessagesClean(c);
       s.exit();
       c.exit();
       done();
@@ -143,6 +148,7 @@ describe('register & call', function () {
     ], function (err) {
       console.log(err && err.stack);
       should.equal(err, null);
+      checkMessagesClean(c);
       s.exit();
       c.exit();
       done();

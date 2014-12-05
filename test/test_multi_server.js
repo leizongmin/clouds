@@ -4,6 +4,10 @@ var async = require('async');
 
 describe('multi', function () {
 
+  function checkMessagesClean (c) {
+    Object.keys(c._messages).length.should.equal(0);
+  }
+
   it('test4 - not the same service name', function (done) {
     var s1 = clouds.createServer();
     var s2 = clouds.createServer();
@@ -36,6 +40,7 @@ describe('multi', function () {
     ], function (err) {
       console.log(err && err.stack);
       should.equal(err, null);
+      checkMessagesClean(c);
       s1.exit();
       s2.exit();
       c.exit();
@@ -102,6 +107,7 @@ describe('multi', function () {
       console.log(err && err.stack);
       should.equal(err, null);
       counter.should.equal(5);
+      checkMessagesClean(c);
       s1.exit();
       s2.exit();
       c.exit();
