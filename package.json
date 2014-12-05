@@ -12,13 +12,15 @@
     "node": ">= 0.10.0"
   },
   "dependencies": {
+    "async": "^0.9.0",
     "debug": ">= 0.7.0",
     "lei-ns": "^0.1.2",
     "lei-utils": "^1.0.3",
     "redis": "^0.12.1"
   },
   "devDependencies": {
-    "mocha": ">= 1.2"
+    "mocha": ">= 1.2",
+    "should": "^4.3.0"
   },
   "scripts": {
     "test": "mocha -t 5000"
