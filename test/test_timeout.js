@@ -33,11 +33,11 @@ describe('timeout', function () {
     var s = clouds.createServer();
     var c = clouds.createClient({timeout: 1});
 
-    var timeout1 = c.bind('test3.timeout.1');
+    var timeout1 = c.bind('test3.timeout.2');
 
     async.series([
       function (next) {
-        s.register('test3.timeout.1', function (callback) {
+        s.register('test3.timeout.2', function (callback) {
           setTimeout(callback, 1500);
         }, next);
       },
