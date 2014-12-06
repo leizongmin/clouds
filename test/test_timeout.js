@@ -184,4 +184,45 @@ describe('timeout', function () {
     });
   });
 
+  it('test3 - auto clear server', function (done) {
+    var s = clouds.createServer();
+    var c = clouds.createClient({
+      timeout: 1,
+      serverMaxAge: 1
+    });
+
+    var timeout6 = c.bind('test3.timeout.6', 100);
+    var counter = 0;
+
+    async.series([
+      function (next) {
+        s.register('test3.timeout.6', function (v, callback) {
+          counter++;
+          if (counter % 2 === 0) {
+            callback(null, v + 1);
+          } else {
+            setTimeout(function () {
+              callback(null, v + 1);
+            }, 1500);
+          }
+        }, next);
+      },
+      function (next) {
+        timeout6(123, function (err, ret) {
+          should.equal(err, null);
+          console.log(counter);
+          next();
+        });
+      },
+    ], function (err) {
+      console.log(err && err.stack);
+      should.equal(err, null);
+      counter.should.greaterThan(1);
+      checkMessagesClean(c);
+      s.exit();
+      c.exit();
+      done();
+    });
+  });
+
 });
