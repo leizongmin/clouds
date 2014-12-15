@@ -82,17 +82,29 @@ testHello('Glen', 'timestamp is ' + Date.now(), function (err, ret) {
 
 ## 消息
 
-`Client`和`Server`均可互相发送消息：
+客户端和服务端均可互相发送消息：
 
 ```javascript
 // 接收消息
 client.on('message', function (sender, msg) {
   // sender表示消息发送者的ID
-  // msg为消息内容
+  // msg为消息内容，可以为对象、字符串、数值等任何可以转换成JSON字符串的内容
 });
 
 // 发送消息
 client.send('receiver', 'msg');
+```
+
+## 自定义查找可用服务器处理函数
+
+客户端设置：
+
+```javascript
+client.set('find server', function (name, callback) {
+  // name表示要调用的服务名
+  // callback为回调函数，第一个参数表示是否出错，第二个参数为可用服务器的ID
+  callback(null, serverId);
+});
 ```
 
 
