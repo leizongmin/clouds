@@ -80,6 +80,21 @@ testHello('Glen', 'timestamp is ' + Date.now(), function (err, ret) {
 });
 ```
 
+## 消息
+
+`Client`和`Server`均可互相发送消息：
+
+```javascript
+// 接收消息
+client.on('message', function (sender, msg) {
+  // sender表示消息发送者的ID
+  // msg为消息内容
+});
+
+// 发送消息
+client.send('receiver', 'msg');
+```
+
 
 授权
 ===========
