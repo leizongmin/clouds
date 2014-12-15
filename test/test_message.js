@@ -8,6 +8,56 @@ describe('send & on message', function () {
     Object.keys(c._messages).length.should.equal(0);
   }
 
+  it('base to base', function (done) {
+    var b1 = clouds.createBase();
+    var b2 = clouds.createBase();
+
+    var msg = {};
+
+    b2.on('message', function (sender, message) {
+      sender.should.equal(b1.id);
+      if (message === 'hello') msg.string = true;
+      if (message === 789) msg.number = true;
+      if (message && typeof message === 'object' && message.a === 123 && message.b === 456) msg.object = true;
+      if (msg.string && msg.number && msg.object) {
+        b1.exit();
+        b2.exit();
+        done();
+      }
+    });
+
+    b1.on('listen', function () {
+      b1.send(b2.id, 'hello');
+      b1.send(b2.id, {a: 123, b: 456});
+      b1.send(b2.id, 789);
+    });
+  });
+
+  it('base to itself', function (done) {
+    var b = clouds.createBase();
+
+    var msg = {};
+
+    b.on('message', function (sender, message) {
+      sender.should.equal(b.id);
+      if (message === 'hello') msg.string = true;
+      if (message === 789) msg.number = true;
+      if (message && typeof message === 'object' && message.a === 123 && message.b === 456) msg.object = true;
+      if (msg.string && msg.number && msg.object) {
+        b.on('exit', function () {
+          done();
+        });
+        b.exit();
+      }
+    });
+
+    b.on('listen', function () {
+      b.send(b.id, 'hello');
+      b.send(b.id, {a: 123, b: 456});
+      b.send(b.id, 789);
+    });
+  });
+
   it('client to client', function (done) {
     var c1 = clouds.createClient({timeout: 5});
     var c2 = clouds.createClient({timeout: 5});
