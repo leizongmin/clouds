@@ -19,6 +19,7 @@
     "redis": "^0.12.1"
   },
   "devDependencies": {
+    "eventproxy": "^0.3.1",
     "mocha": ">= 1.2",
     "should": "^4.3.0"
   },
