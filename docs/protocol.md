@@ -33,6 +33,7 @@
   "t": "r",
   "s": "发送者",
   "d": {
+    "i": "消息ID",
     "e": 是否出错，未出错为null,
     "r": 执行结果
   }
@@ -73,10 +74,11 @@ protocol.packCall(method, args);
 #### 封装调用结果
 
 ```JavaScript
-protocol.packResult(messageId, result);
+protocol.packResult(messageId, err, result);
 ```
 
 + __messageId__ 消息ID
++ __err__ 是否出错，null表示没出错
 + __result__ 执行结果
 
 ### 注册自定义消息
