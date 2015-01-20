@@ -214,4 +214,30 @@ describe('send & on message', function () {
     });
   });
 
+  it('base to base (specified id)', function (done) {
+    var ID = 'hello';
+    var b1 = clouds.createBase();
+    var b2 = clouds.createBase({id: ID});
+
+    var msg = {};
+
+    b2.on('message', function (sender, message) {
+      sender.should.equal(b1.id);
+      if (message === 'hello') msg.string = true;
+      if (message === 789) msg.number = true;
+      if (message && typeof message === 'object' && message.a === 123 && message.b === 456) msg.object = true;
+      if (msg.string && msg.number && msg.object) {
+        b1.exit();
+        b2.exit();
+        done();
+      }
+    });
+
+    b1.on('listen', function () {
+      b1.send(ID, 'hello');
+      b1.send(ID, {a: 123, b: 456});
+      b1.send(ID, 789);
+    });
+  });
+
 });
