@@ -1,7 +1,7 @@
 {
   "name": "clouds",
   "main": "./lib/index.js",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "services cloud",
   "author": "Zongmin Lei <leizongmin@gmail.com> (http://ucdok.com)",
   "repository": {
