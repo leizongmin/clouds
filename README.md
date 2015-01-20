@@ -1,5 +1,5 @@
 分布式服务框架
-==============
+============
 
 + 基于Redis来传递消息
 + 无管理主机，由节点自主维护
@@ -9,7 +9,7 @@
 + 可以随意启动多个节点进程，相同的服务也可以派发到多个不同节点来处理
 
 
-## 服务器端
+## 服务器端（Server）
 
 ```javascript
 var clouds = require('clouds');
@@ -34,7 +34,7 @@ server.register('test.hello', function (name, msg, callback) {
 });
 ```
 
-## 客户端
+## 客户端（Client）
 
 ```javascript
 var clouds = require('clouds');
@@ -80,7 +80,7 @@ testHello('Glen', 'timestamp is ' + Date.now(), function (err, ret) {
 });
 ```
 
-## 消息
+## 客户端之间消息通信
 
 客户端和服务端均可互相发送消息：
 
@@ -107,9 +107,14 @@ client.set('find server', function (name, callback) {
 });
 ```
 
+## 中间人（Broker）
 
-授权
-===========
+
+
+
+
+授权协议
+=======
 
 基于MIT协议发布
 
