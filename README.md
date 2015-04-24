@@ -9,6 +9,13 @@
 + 可以随意启动多个节点进程，相同的服务也可以派发到多个不同节点来处理
 
 
+## 安装
+
+```bash
+$ npm install clouds --save
+```
+
+
 ## 服务器端（Server）
 
 ```javascript
