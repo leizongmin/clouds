@@ -6,7 +6,7 @@
   "author": "Zongmin Lei <leizongmin@gmail.com> (http://ucdok.com)",
   "repository": {
     "type": "git",
-    "url": "git://github.com/leizongmin/node-cloud.git"
+    "url": "git://github.com/leizongmin/clouds.git"
   },
   "engines": {
     "node": ">= 0.10.0"
@@ -24,6 +24,6 @@
     "should": "^4.3.0"
   },
   "scripts": {
-    "test": "mocha -t 5000"
+    "test": "./run_test"
   }
 }
