@@ -1,8 +1,8 @@
 {
   "name": "clouds",
   "main": "./lib/index.js",
-  "version": "0.1.4",
-  "description": "services cloud",
+  "version": "0.1.5",
+  "description": "simple remote services framework",
   "author": "Zongmin Lei <leizongmin@gmail.com> (http://ucdok.com)",
   "repository": {
     "type": "git",
