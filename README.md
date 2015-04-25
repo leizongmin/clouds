@@ -114,15 +114,6 @@ client.set('find server', function (name, callback) {
 });
 ```
 
-## 中间人（Broker）
-
-+ Brocker原则上只能启动一份
-+ Client每次调用服务时，需要请求Brocker返回一个可用的serverId，再向此serverId发送调用请求
-+ Server每秒向Brocker发送一次心跳，Brocker优先返回最近发来心跳信号的serverId
-+ Brocker提供自定义返回serverId算法的接口
-+ Client定期汇报调用服务次数、重试次数、失败次数、成功次数
-+ Server定期汇报服务被调用次数、失败响应次数（返回err）、成功返回次数（err=null）
-+ Brocker提供查询Client和Server状态的接口
 
 
 License
