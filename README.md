@@ -102,18 +102,6 @@ client.on('message', function (sender, msg) {
 client.send('receiver', 'msg');
 ```
 
-## 自定义查找可用服务器处理函数
-
-客户端设置：
-
-```javascript
-client.set('find server', function (name, callback) {
-  // name表示要调用的服务名
-  // callback为回调函数，第一个参数表示是否出错，第二个参数为可用服务器的ID
-  callback(null, serverId);
-});
-```
-
 
 
 License
