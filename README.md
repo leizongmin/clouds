@@ -71,6 +71,29 @@ client.call('test.hello', ['Glen', 'timestamp is ' + Date.now()], function (err,
 });
 ```
 
+## 监视器（Monitor）
+
+```javascript
+var clouds = require('clouds');
+
+// 创建服务器
+var monitor = new clouds.Monitor({
+  // redis连接配置
+  redis: {
+    host: '127.0.0.1',
+    port: 6379,
+    db: 3
+  }
+});
+
+// 获取状态
+monitor.status(function (err, info) {
+  console.log(err, info);
+  // info.methods服务名对应的服务器ID列表
+  // info.servers服务器对应的服务名列表
+});
+```
+
 ## 出错处理
 
 客户端在初始化时可设置一个超时时间，如果调用的服务超过该时间没有返回结果，将返回一个服务超时的错误。
