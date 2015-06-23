@@ -1,7 +1,7 @@
 {
   "name": "clouds",
   "main": "./lib/index.js",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "simple remote services framework",
   "author": "Zongmin Lei <leizongmin@gmail.com> (http://ucdok.com)",
   "repository": {
@@ -14,9 +14,9 @@
   "dependencies": {
     "async": "^0.9.0",
     "debug": ">= 0.7.0",
+    "ioredis": "^1.5.1",
     "lei-ns": "^0.1.2",
-    "lei-utils": "^1.0.3",
-    "redis": "^0.12.1"
+    "lei-utils": "^1.0.3"
   },
   "devDependencies": {
     "async": "^0.9.0",
