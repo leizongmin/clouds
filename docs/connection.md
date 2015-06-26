@@ -3,6 +3,11 @@
 数据传输接口提供以下方法：
 
 ```javascript
+// 设置客户端ID
+connection.setId = function (id) {
+  this.id = id;
+};
+
 // 注册一个key
 connection.registerKey = function (key, ttl, callback) {
   // key: 要注册的key
@@ -45,3 +50,10 @@ connection.exit = function (callback) {
   callback(err);
 };
 ```
+
+在连接成功后需要触发事件`listen`：
+
+```javascript
+connection.emit('listen');
+```
+
