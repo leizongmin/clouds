@@ -1,0 +1,4 @@
+#!/bin/sh
+
+mocha --require blanket -R html-cov -t 60000 test/* > coverage.html
+open coverage.html

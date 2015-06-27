@@ -21,11 +21,23 @@
   },
   "devDependencies": {
     "async": "^0.9.0",
+    "blanket": "^1.1.7",
     "eventproxy": "^0.3.1",
-    "mocha": ">= 1.2",
+    "mocha": "^2.2.5",
     "should": "^4.3.0"
   },
   "scripts": {
     "test": "./run_test"
+  },
+  "config": {
+    "blanket": {
+      "pattern": [
+        "lib"
+      ],
+      "data-cover-never": [
+        "node_modules",
+        "tests"
+      ]
+    }
   }
 }

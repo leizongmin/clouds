@@ -126,9 +126,23 @@ client.send('receiver', 'msg');
 ```
 
 
+## Coverage
 
-License
-=======
+```bash
+$ ./run_coverage
+```
+
+94% coverage, 512 SLOC
+
+
+## Tests
+
+```bash
+$ ./run_test
+```
+
+
+## License
 
 ```
 Copyright (c) 2012-2015 Zongmin Lei (雷宗民) <leizongmin@gmail.com>
