@@ -3,10 +3,8 @@
 
 + 基于Redis来传递消息
 + 无管理主机，由节点自主维护
-+ 服务器任意加入
++ 服务提供者动态加入，自动负载均衡
 + 简单出错处理机制：调用超时自动重新调用，超过一定次数时返回调用失败错误
-+ 目前没有做任何性能测试
-+ 可以随意启动多个节点进程，相同的服务也可以派发到多个不同节点来处理
 
 
 ## 安装
@@ -16,12 +14,12 @@ $ npm install clouds --save
 ```
 
 
-## 服务器端（Server）
+## 服务提供者（Server）
 
 ```javascript
 var clouds = require('clouds');
 
-// 创建服务器
+// 创建服务提供者
 var server = new clouds.Server({
   // redis连接配置
   redis: {
@@ -29,7 +27,7 @@ var server = new clouds.Server({
     port: 6379,
     db: 3
   },
-  // 心跳周期，如果服务器端异常下线，超过指定时间将自动从服务器端删除，单位：秒
+  // 心跳周期，如果服务提供者异常下线，超过指定时间将自动从服务器端删除，单位：秒
   heartbeat: 2
 });
 
@@ -98,7 +96,7 @@ monitor.status(function (err, info) {
 
 客户端在初始化时可设置一个超时时间，如果调用的服务超过该时间没有返回结果，将返回一个服务超时的错误。
 
-在`Client.bind()`时可以指定自动重试的次数（仅当重试次数超过指定值时才放弃，并执行回调函数），比如：
+在`Client.bind()`时可以指定自动重试的次数（仅当重试次数超过指定值时才放弃，并执行回调函数，默认为0，即不重试），比如：
 
 ```javascript
 // 返回一个函数，用于直接调用远程服务，第一个参数是服务名，第二个参数最大重试次数
@@ -126,7 +124,14 @@ client.send('receiver', 'msg');
 ```
 
 
-## Coverage
+## 单元测试
+
+```bash
+$ ./run_test
+```
+
+
+## 单元测试覆盖率
 
 ```bash
 $ ./run_coverage
@@ -135,11 +140,9 @@ $ ./run_coverage
 94% coverage, 512 SLOC
 
 
-## Tests
+## 性能测试
 
-```bash
-$ ./run_test
-```
+[clouds-benchmark项目](https://github.com/leizongmin/clouds-benchmark)
 
 
 ## License
