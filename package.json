@@ -1,7 +1,7 @@
 {
   "name": "clouds",
   "main": "./lib/index.js",
-  "version": "0.1.14",
+  "version": "0.2.0",
   "description": "simple remote services framework",
   "author": "Zongmin Lei <leizongmin@gmail.com> (http://ucdok.com)",
   "repository": {
@@ -12,32 +12,21 @@
     "node": ">= 0.10.0"
   },
   "dependencies": {
-    "async": "^0.9.0",
+    "async": "^1.5.2",
     "clone": "^1.0.2",
-    "debug": ">= 0.7.0",
-    "ioredis": "^1.5.1",
-    "lei-ns": "^0.1.2",
-    "lei-utils": "^1.0.3"
+    "debug": "^2.2.0",
+    "lei-ns": "^0.2.0",
+    "lei-utils": "^2.0.3",
+    "super-queue": "0.0.2"
   },
   "devDependencies": {
-    "async": "^0.9.0",
-    "blanket": "^1.1.7",
-    "eventproxy": "^0.3.1",
-    "mocha": "^2.2.5",
-    "should": "^4.3.0"
+    "eventproxy": "^0.3.4",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.3.4",
+    "should": "^8.2.0"
   },
   "scripts": {
-    "test": "./run_test"
-  },
-  "config": {
-    "blanket": {
-      "pattern": [
-        "lib"
-      ],
-      "data-cover-never": [
-        "node_modules",
-        "tests"
-      ]
-    }
+    "test": "export DEBUG='clouds:*' && ./node_modules/.bin/mocha -t 5000",
+    "coverage": "npm run compile_test && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -t 5000"
   }
 }
