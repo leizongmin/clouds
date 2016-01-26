@@ -1,3 +1,5 @@
+'use strict';
+
 const clouds = require('../');
 const assert = require('assert');
 const async = require('async');

@@ -1,6 +1,8 @@
-var clouds = require('../');
-var should = require('should');
-var async = require('async');
+'use strict';
+
+const clouds = require('../');
+const should = require('should');
+const async = require('async');
 
 describe('benchmark', function () {
 
@@ -9,16 +11,19 @@ describe('benchmark', function () {
   }
 
   it('test7 - 10000 calls', function (done) {
-    var s1 = clouds.createServer();
-    var s2 = clouds.createServer();
-    var s3 = clouds.createServer();
-    var c = clouds.createClient({timeout: 20});
+    const s1 = clouds.createServer();
+    const s2 = clouds.createServer();
+    const s3 = clouds.createServer();
+    const c = clouds.createClient({timeout: 20});
 
-    var MAX = 10000;
-    var counter = {a: 0, b: 0, c: 0};
-    var multi1 = c.bind('test7.multi.1', 1);
+    const MAX = 10000;
+    let counter = {a: 0, b: 0, c: 0};
+    const multi1 = c.bind('test7.multi.1', 1);
 
     async.series([
+      function (next) {
+        c.ready(next);
+      },
       function (next) {
         s1.register('test7.multi.1', function (v, callback) {
           callback(null, 'a');
