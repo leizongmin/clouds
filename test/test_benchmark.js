@@ -26,21 +26,27 @@ describe('benchmark', function () {
       },
       function (next) {
         s1.register('test7.multi.1', function (v, callback) {
-          callback(null, 'a');
+          setTimeout(function () {
+            callback(null, 'a');
+          }, Math.random() * 200);
         }, next);
       },
       function (next) {
         s2.register('test7.multi.1', function (v, callback) {
-          callback(null, 'b');
+          setTimeout(function () {
+            callback(null, 'b');
+          }, Math.random() * 200);
         }, next);
       },
       function (next) {
         s3.register('test7.multi.1', function (v, callback) {
-          callback(null, 'c');
+          setTimeout(function () {
+            callback(null, 'c');
+          }, Math.random() * 200);
         }, next);
       },
       function (next) {
-        async.timesSeries(MAX, function (i, next) {
+        async.times(MAX, function (i, next) {
           multi1(i, function (err, n) {
             should.equal(err, null);
             counter[n]++;
