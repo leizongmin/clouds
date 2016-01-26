@@ -17,7 +17,9 @@ c.ready(() => {
   console.log('ready');
 
   testHello('Glen', 'timestamp is ' + Date.now(), (err, ret) => {
-    console.log(arguments);
-    //c.exit();
+    console.log(err, ret);
+    c.exit(err => {
+      console.log('exited: err=%s', err);
+    });
   });
 });
