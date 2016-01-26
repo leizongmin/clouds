@@ -1,13 +1,13 @@
 'use strict';
 
 const clouds = require('../');
-const should = require('should');
+const assert = require('assert');
 const async = require('async');
 
 describe('benchmark', function () {
 
   function checkMessagesClean (c) {
-    Object.keys(c._messages).length.should.equal(0);
+    assert.equal(Object.keys(c._messages).length, 0);
   }
 
   it('test7 - 10000 calls', function (done) {
@@ -48,7 +48,7 @@ describe('benchmark', function () {
       function (next) {
         async.times(MAX, function (i, next) {
           multi1(i, function (err, n) {
-            should.equal(err, null);
+            assert.equal(err, null);
             counter[n]++;
             next();
           });
@@ -56,8 +56,8 @@ describe('benchmark', function () {
       }
     ], function (err) {
       console.log(err && err.stack);
-      should.equal(err, null);
-      (counter.a + counter.b + counter.c).should.equal(MAX);
+      assert.equal(err, null);
+      assert.equal(counter.a + counter.b + counter.c, MAX);
       console.log(counter);
       s1.exit();
       s2.exit();
