@@ -20,7 +20,6 @@
     "super-queue": "0.0.2"
   },
   "devDependencies": {
-    "eventproxy": "^0.3.4",
     "istanbul": "^0.4.2",
     "mocha": "^2.3.4",
     "should": "^8.2.0"
