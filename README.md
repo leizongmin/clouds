@@ -1,6 +1,7 @@
 分布式服务框架
 ============
 
+基于Redis的分布式服务框架，传输层使用[super-queue](https://github.com/SuperID/super-queue)消息队列模块。
 
 ## 安装
 
@@ -91,51 +92,6 @@ monitor.status(function (err, info) {
   // info.methods服务名对应的服务器ID列表
   // info.servers服务器对应的服务名列表
 });
-```
-
-## 出错处理
-
-客户端在初始化时可设置一个超时时间，如果调用的服务超过该时间没有返回结果，将返回一个服务超时的错误。
-
-在`Client.bind()`时可以指定自动重试的次数（仅当重试次数超过指定值时才放弃，并执行回调函数，默认为0，即不重试），比如：
-
-```javascript
-// 返回一个函数，用于直接调用远程服务，第一个参数是服务名，第二个参数最大重试次数
-var testHello = client.bind('test.hello', 5);
-
-// 调用远程服务，跟使用本地普通函数差不多
-testHello('Glen', 'timestamp is ' + Date.now(), function (err, ret) {
-  console.log(err, ret);
-});
-```
-
-## 客户端之间消息通信
-
-客户端和服务端均可互相发送消息：
-
-```javascript
-// 接收消息
-client.on('message', function (sender, msg) {
-  // sender表示消息发送者的ID
-  // msg为消息内容，可以为对象、字符串、数值等任何可以转换成JSON字符串的内容
-});
-
-// 发送消息
-client.send('receiver', 'msg');
-```
-
-
-## 单元测试
-
-```bash
-$ npm test
-```
-
-
-## 单元测试覆盖率
-
-```bash
-$ npm run coverage
 ```
 
 
