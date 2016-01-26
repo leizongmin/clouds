@@ -1,7 +1,7 @@
-var clouds = require('../');
+const clouds = require('../');
 
 
-var c = new clouds.Client({
+const c = new clouds.Client({
   redis: {
     host: '127.0.0.1',
     port: 6379,
@@ -10,16 +10,14 @@ var c = new clouds.Client({
   timeout: 1
 });
 
-var testHello = c.bind('test.hello');
-//setInterval(function () {
-  testHello('Glen', 'timestamp is ' + Date.now(), function (err, ret) {
+const testHello = c.bind('test.hello');
+//console.log(c);
+
+c.ready(() => {
+  console.log('ready');
+
+  testHello('Glen', 'timestamp is ' + Date.now(), (err, ret) => {
     console.log(arguments);
     //c.exit();
   });
-//}, 1000);
-
-var testRetry = c.bind('test.retry', 10);
-testRetry('hahahaha', function (err) {
-  console.log(err);
-  c.exit();
 });

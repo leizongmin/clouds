@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "async": "^1.5.2",
-    "clone": "^1.0.2",
     "debug": "^2.2.0",
     "lei-ns": "^0.2.0",
+    "lei-promise": "0.0.4",
     "lei-utils": "^2.0.3",
     "super-queue": "0.0.2"
   },

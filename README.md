@@ -1,11 +1,6 @@
 分布式服务框架
 ============
 
-+ 基于Redis来传递消息
-+ 无管理主机，由节点自主维护
-+ 服务提供者动态加入，自动负载均衡
-+ 简单出错处理机制：调用超时自动重新调用，超过一定次数时返回调用失败错误
-
 
 ## 安装
 
@@ -42,9 +37,9 @@ server.register('test.hello', function (name, msg, callback) {
 ## 客户端（Client）
 
 ```javascript
-var clouds = require('clouds');
+const clouds = require('clouds');
 
-var client = new clouds.Client({
+const client = new clouds.Client({
   // redis连接配置
   redis: {
     host: '127.0.0.1',
@@ -53,18 +48,24 @@ var client = new clouds.Client({
   },
   // 调用超时时间，如果服务器超过指定时间没有响应结果，则认为调用失败，单位：秒
   timeout: 2
+  // 心跳周期，如果服务提供者异常下线，超过指定时间将自动从服务器端删除，单位：秒
+  heartbeat: 2
 });
 
 // 返回一个函数，用于直接调用远程服务
-var testHello = client.bind('test.hello');
+const testHello = client.bind('test.hello');
+
+client.ready(() => {
+  // 当所有bind()的函数都已经准备就绪时只需回调
+});
 
 // 调用远程服务，跟使用本地普通函数差不多
-testHello('Glen', 'timestamp is ' + Date.now(), function (err, ret) {
+testHello('Glen', 'timestamp is ' + Date.now(), (err, ret) => {
   console.log(err, ret);
 });
 
 // 也可以这样直接调用，第一个参数是服务名，第二个参数是调用参数数组，第三个参数是回调函数
-client.call('test.hello', ['Glen', 'timestamp is ' + Date.now()], function (err, ret) {
+client.call('test.hello', ['Glen', 'timestamp is ' + Date.now()], (err, ret) => {
   console.log(err, ret);
 });
 ```
@@ -127,28 +128,21 @@ client.send('receiver', 'msg');
 ## 单元测试
 
 ```bash
-$ ./run_test
+$ npm test
 ```
 
 
 ## 单元测试覆盖率
 
 ```bash
-$ ./run_coverage
+$ npm run coverage
 ```
-
-94% coverage, 512 SLOC
-
-
-## 性能测试
-
-[clouds-benchmark项目](https://github.com/leizongmin/clouds-benchmark)
 
 
 ## License
 
 ```
-Copyright (c) 2012-2015 Zongmin Lei (雷宗民) <leizongmin@gmail.com>
+Copyright (c) 2012-2016 Zongmin Lei (雷宗民) <leizongmin@gmail.com>
 http://ucdok.com
 
 The MIT License
