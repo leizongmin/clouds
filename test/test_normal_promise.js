@@ -42,7 +42,53 @@ describe('multi', function () {
           .catch(next);
       }
     ], function (err) {
-      console.log(err && err.stack);
+      assert.equal(err, null);
+      Promise.all([s1.exitP(), c.exitP()])
+        .then(ret => done())
+        .catch(done);
+    });
+  });
+
+  it('test5 - not the same service name', function (done) {
+    const s1 = clouds.createServer();
+    const c = clouds.createClient({timeout: 1});
+    async.series([
+      function (next) {
+        c.bindP('test5.multi.1');
+        c.bindP('test5.multi.2');
+        c.readyP().then(next).catch(next);
+      },
+      function (next) {
+        s1.register('test5.multi.1', function (v, callback) {
+          callback(new Error('e' + v));
+        }, next);
+      },
+      function (next) {
+        s1.register('test5.multi.2', function (v, callback) {
+          callback(new Error('e2' + v));
+        }, next);
+      },
+      function (next) {
+        c.callP('test5.multi.1', [2])
+          .then(ret => {
+            next(Error('should callback error'));
+          })
+          .catch(err => {
+            assert.equal(err.message, 'e2');
+            next();
+          });
+      },
+      function (next) {
+        c.callP('test5.multi.2', [3])
+          .then(ret => {
+            next(Error('should callback error'));
+          })
+          .catch(err => {
+            assert.equal(err.message, 'e23');
+            next();
+          });
+      }
+    ], function (err) {
       assert.equal(err, null);
       Promise.all([s1.exitP(), c.exitP()])
         .then(ret => done())
@@ -91,7 +137,6 @@ describe('multi', function () {
         }, next);
       }
     ], function (err) {
-      console.log(err && err.stack);
       assert.equal(err, null);
       assert.equal((counter.a + counter.b + counter.c), MAX);
       Promise.all([s1.exitP(), s2.exitP(), s3.exitP(), c.exitP()])

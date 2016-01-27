@@ -48,6 +48,46 @@ describe('multi', function () {
     });
   });
 
+  it('test5 - not the same service name', function (done) {
+    const s1 = clouds.createServer();
+    const c = clouds.createClient({timeout: 1});
+    async.series([
+      function (next) {
+        c.bind('test5.multi.1');
+        c.bind('test5.multi.2');
+        c.ready(next);
+      },
+      function (next) {
+        s1.register('test5.multi.1', function (v, callback) {
+          callback(new Error('e' + v));
+        }, next);
+      },
+      function (next) {
+        s1.register('test5.multi.2', function (v, callback) {
+          callback(new Error('e2' + v));
+        }, next);
+      },
+      function (next) {
+        c.call('test5.multi.1', [2], function (err, ret) {
+          assert.equal(err.message, 'e2');
+          next();
+        });
+      },
+      function (next) {
+        c.call('test5.multi.2', [3], function (err, ret) {
+          assert.equal(err.message, 'e23');
+          next();
+        });
+      }
+    ], function (err) {
+      console.log(err && err.stack);
+      assert.equal(err, null);
+      s1.exit();
+      c.exit();
+      done();
+    });
+  });
+
   it('test6 - 1000 calls', function (done) {
     const s1 = clouds.createServer();
     const s2 = clouds.createServer();
