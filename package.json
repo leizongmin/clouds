@@ -12,14 +12,12 @@
     "node": ">= 4.0.0"
   },
   "dependencies": {
-    "async": "^1.5.2",
     "debug": "^2.2.0",
-    "lei-ns": "^0.2.0",
-    "lei-promise": "0.0.4",
     "lei-utils": "^2.0.3",
-    "super-queue": "0.0.2"
+    "super-queue": "0.0.3"
   },
   "devDependencies": {
+    "async": "^1.5.2",
     "istanbul": "^0.4.2",
     "mocha": "^2.3.4",
     "should": "^8.2.0"
