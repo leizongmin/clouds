@@ -26,6 +26,6 @@
   },
   "scripts": {
     "test": "export DEBUG='clouds:*' && ./node_modules/.bin/mocha -t 5000",
-    "coverage": "npm run compile_test && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -t 5000"
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -t 5000"
   }
 }
