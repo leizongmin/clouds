@@ -14,7 +14,7 @@
   "dependencies": {
     "debug": "^2.2.0",
     "lei-utils": "^2.0.3",
-    "super-queue": "0.0.3"
+    "super-queue": "0.0.5"
   },
   "devDependencies": {
     "async": "^1.5.2",
@@ -23,7 +23,8 @@
     "should": "^8.2.0"
   },
   "scripts": {
-    "test": "export DEBUG='clouds:*' && ./node_modules/.bin/mocha -t 5000",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -t 5000"
+    "test": "mocha -t 5000",
+    "test:dev": "export DEBUG='clouds:*' && mocha -t 5000",
+    "coverage": "istanbul cover _mocha -- -t 5000"
   }
 }
