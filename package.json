@@ -17,10 +17,10 @@
     "super-queue": "0.0.5"
   },
   "devDependencies": {
-    "async": "^1.5.2",
+    "async": "^2.0.0-rc.6",
     "istanbul": "^0.4.2",
     "mocha": "^2.3.4",
-    "should": "^8.2.0"
+    "should": "^9.0.2"
   },
   "scripts": {
     "test": "mocha -t 5000",
