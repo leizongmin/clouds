@@ -1,7 +1,7 @@
 {
   "name": "clouds",
   "main": "./lib/index.js",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "lightweight remote services framework base on Redis 基于Redis的分布式服务框架",
   "author": "Zongmin Lei <leizongmin@gmail.com> (http://ucdok.com)",
   "repository": {
@@ -14,7 +14,7 @@
   "dependencies": {
     "debug": "^2.2.0",
     "lei-utils": "^2.0.3",
-    "super-queue": "0.0.5"
+    "super-queue": "0.0.6"
   },
   "devDependencies": {
     "async": "^2.0.0-rc.6",
