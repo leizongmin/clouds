@@ -1,6 +1,8 @@
 分布式服务框架
 ============
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/leizongmin/clouds.svg)](https://greenkeeper.io/)
+
 基于Redis的分布式服务框架，传输层使用[super-queue](https://github.com/SuperID/super-queue)消息队列模块。
 
 ## 安装
